@@ -5,6 +5,7 @@ let drinkName = "";
 var userFormEl = document.querySelector('#drink-form');
 var submitButton = document.querySelector('button');
 var nameInputEl = document.querySelector('#drink-name');
+var dataContainer = document.querySelector(".data-container");
 
 var ingredients;
 var apiDrinkName;
@@ -62,7 +63,7 @@ function getDrinkApi() {
       })
       .then(function (data) {
         console.log(data)
-
+        ingredientsArr = [];
         for (let index = 0; index < data[0].ingredients.length; index++) {
           // console.log(data[0].ingredients.length);
           console.log(data[0].ingredients[index]);
@@ -80,28 +81,31 @@ function getDrinkApi() {
 };
 
 function displayDrinkData () {
-  var drinkDataContainer = document.querySelector('.container');
+//   var drinkDataContainer = document.querySelector('.container');
+    dataContainer.innerHTML = '';
+
 
   drinkh2 = document.createElement('h2');
   drinkh2.textContent = apiDrinkName;
-  drinkDataContainer.appendChild(drinkh2);
+  dataContainer.appendChild(drinkh2);
 
   ingredList = document.createElement ('ul');
 
   for (let index = 0; index < ingredientsArr.length; index++) {
       ingredLi = document.createElement('li');
       ingredLi.textContent = ingredientsArr[index];
-      drinkDataContainer.appendChild(ingredLi);
+      dataContainer.appendChild(ingredLi);
   };
 
   var instructionsLi = document.createElement('p');
   instructionsLi.textContent = 'Instructions: '+ drinkInstructions;
-  drinkDataContainer.appendChild(instructionsLi);
+  dataContainer.appendChild(instructionsLi);
+  console.log(dataContainer.innerHTML);
 };
 
 function getYoutubeApi() {
     // fetch request gets a list of all the repos for the node.js organization
-    var requestUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${drinkName}%20recipe&topicId=%2Fm%2F02wbm&key=${youtubeApiKey}`;
+    var requestUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${apiDrinkName}%20recipe&topicId=%2Fm%2F02wbm&key=${youtubeApiKey}`;
 
     fetch(requestUrl)
       .then(function (response) {
