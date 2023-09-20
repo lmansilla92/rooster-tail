@@ -2,25 +2,54 @@ const youtubeApiKey = "AIzaSyBxsSu73r-9dtqHr1bE6gcuq88r5C9ZTDI";
 const cocktailApiKey = "0e2b4249bemshfa8c68bfa635a86p1f35e8jsn8175510a48cc";
 let drinkName = "";
 
-var userInputEl = document.querySelector('input');
+var userFormEl = document.querySelector('#drink-form');
 var submitButton = document.querySelector('button');
+var nameInputEl = document.querySelector('#drink-name');
 
 var ingredients;
 var apiDrinkName;
+var drinkInstructions;
 
 ingredientsArr = [];
+
 let videoPlayer = document.querySelector("#player");
 let videoId = "";
 
 var formSubmitHandler = function(event) {
   event.preventDefault();
 
-  drinkName = userInputEl.value.trim();
+  drinkName = nameInputEl.value.trim();
   console.log(drinkName);
   if(drinkName) {
     getDrinkApi();
   }else{
-      alert('Please enter a drink name'); //<--- This needs to be changed can't user alerts.
+    // MODAL
+            // Get the modal
+            var modal = document.getElementById("myModal");
+            
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            
+            // When the user clicks the button, open the modal 
+              modal.style.display = "block";
+            
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+    // MODAL
+      // alert('Please enter a drink name'); //<--- This needs to be changed can't user alerts.
     }
 };
 
@@ -33,14 +62,7 @@ function getDrinkApi() {
       })
       .then(function (data) {
         console.log(data)
-        // drinkName = userInputEl.value;
-        // console.log(drinkName);
 
-        // ingredients = data[0].ingredients[0];
-        
-        // ingredientsArr.push(data[0].)
-
-        // console.log(ingredients);
         for (let index = 0; index < data[0].ingredients.length; index++) {
           // console.log(data[0].ingredients.length);
           console.log(data[0].ingredients[index]);
@@ -48,6 +70,7 @@ function getDrinkApi() {
         }
 
         apiDrinkName = data[0].name.toUpperCase();
+        drinkInstructions = data[0].instructions;
 
         console.log(data[0].instructions);
         console.log(data[0].name.toUpperCase());
@@ -69,8 +92,12 @@ function displayDrinkData () {
       ingredLi = document.createElement('li');
       ingredLi.textContent = ingredientsArr[index];
       drinkDataContainer.appendChild(ingredLi);
-  }
-}
+  };
+
+  var instructionsLi = document.createElement('p');
+  instructionsLi.textContent = 'Instructions: '+ drinkInstructions;
+  drinkDataContainer.appendChild(instructionsLi);
+};
 
 function getYoutubeApi() {
     // fetch request gets a list of all the repos for the node.js organization
@@ -91,7 +118,7 @@ function getYoutubeApi() {
 // youtube embedded player example src
 // http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com
 
-submitButton.addEventListener('click', formSubmitHandler);
+userFormEl.addEventListener('submit', formSubmitHandler);
 
 
 
