@@ -9,6 +9,8 @@ var ingredients;
 var apiDrinkName;
 
 ingredientsArr = [];
+let videoPlayer = document.querySelector("#player");
+let videoId = "";
 
 var formSubmitHandler = function(event) {
   event.preventDefault();
@@ -50,6 +52,7 @@ function getDrinkApi() {
         console.log(data[0].instructions);
         console.log(data[0].name.toUpperCase());
         displayDrinkData();
+        getYoutubeApi();
       });
 };
 
@@ -79,8 +82,17 @@ function getYoutubeApi() {
       })
       .then(function (data) {
         console.log(data)
+        videoId = data.items[0].id.videoId;
+        videoPlayer.src = `http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`;
 
       });
 }
 
+// youtube embedded player example src
+// http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com
+
 submitButton.addEventListener('click', formSubmitHandler);
+
+
+
+
