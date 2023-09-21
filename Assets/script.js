@@ -11,11 +11,14 @@ var ingredients;
 var apiDrinkName;
 var drinkInstructions;
 
-ingredientsArr = [];
+var ingredientsArr = [];
+var drinkListArr = []; // <--- Empty array to store the list of drink names user searches.
+const maxDrinksInList = 5; //<--- Number of drinks we want to display 
 
 let videoPlayer = document.querySelector("#player");
 let videoId = "";
 
+// First function after user submits. 
 var formSubmitHandler = function(event) {
   event.preventDefault();
 
@@ -63,6 +66,7 @@ function getDrinkApi() {
       })
       .then(function (data) {
         console.log(data)
+
         ingredientsArr = [];
         for (let index = 0; index < data[0].ingredients.length; index++) {
           // console.log(data[0].ingredients.length);
@@ -77,6 +81,8 @@ function getDrinkApi() {
         console.log(data[0].name.toUpperCase());
         displayDrinkData();
         getYoutubeApi();
+        manageDrinkList();
+        displayDrinkBtns();
       });
 };
 
@@ -122,8 +128,42 @@ function getYoutubeApi() {
 // youtube embedded player example src
 // http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com
 
+function manageDrinkList (){
+  drinkListArr.unshift(drinkName); //<--- Adds the drink name to the array. Unshift puts it in the top and shifts the list down.
+
+  // This for loop deletes duplicate drink names
+  for (i=1; i< drinkListArr.length; i++) {
+    if (drinkName === drinkListArr[i]) {
+      drinkListArr.splice(i,1);
+    }
+  }
+
+  // Keep the drinkListArr length at 5 (we can change if we want more/less drink names in the list)
+  while(drinkListArr.length>maxDrinksInList) {
+    drinkListArr.pop(); //<--- pop will remove 1 name from the bottom of array.
+  };
+
+  // Set the array into local storage in 'drinks'
+  localStorage.setItem("drinks", JSON.stringify(drinkListArr));
+};
+
+function buildDrinkList() {
+  // Get the Item out of local storage
+  let localReturn = localStorage.getItem("drinks");
+  if (localReturn){
+    drinkListArr = JSON.parse(localReturn);
+  };
+};
+
+// This is where I started to work on displaying the drink list as buttons. 
+// *** Not finished ***
+function displayDrinkBtns() {
+  for (i=0; i<drinkListArr.length; i++) {
+    var btn1 = document.createElement('button');
+  }
+}
+
+
+
+
 userFormEl.addEventListener('submit', formSubmitHandler);
-
-
-
-
