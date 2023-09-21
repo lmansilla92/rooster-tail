@@ -6,6 +6,10 @@ var userFormEl = document.querySelector('#drink-form');
 var submitButton = document.querySelector('button');
 var nameInputEl = document.querySelector('#drink-name');
 var dataContainer = document.querySelector(".data-container");
+// Get the modal
+
+var modalBody = document.querySelector(".modal-body"); // <--- Gets the modal body from html, make it global.
+var modalMessage; //<--- Made a global var for the modal message.
 
 var ingredients;
 var apiDrinkName;
@@ -27,9 +31,18 @@ var formSubmitHandler = function(event) {
   if(drinkName) {
     getDrinkApi();
   }else{
-    // MODAL
+    modalMessage = "<p>No Drink Name was Entered </p>";
+    presentModal();
+    }
+};
+
+// Put all of the modal stuff inside of a new function.
+function presentModal() {
+  modalBody.innerHTML=modalMessage; //<---This sets the modal message into the HTML 
+
+      // MODAL
             // Get the modal
-            var modal = document.getElementById("myModal");
+           var modal = document.getElementById("myModal");
             
             // Get the button that opens the modal
             var btn = document.getElementById("myBtn");
@@ -38,7 +51,7 @@ var formSubmitHandler = function(event) {
             var span = document.getElementsByClassName("close")[0];
             
             // When the user clicks the button, open the modal 
-              modal.style.display = "block";
+             modal.style.display = "block";
             
             
             // When the user clicks on <span> (x), close the modal
@@ -54,7 +67,6 @@ var formSubmitHandler = function(event) {
             }
     // MODAL
       // alert('Please enter a drink name'); //<--- This needs to be changed can't user alerts.
-    }
 };
 
 function getDrinkApi() {
@@ -68,6 +80,11 @@ function getDrinkApi() {
         console.log(data)
 
         ingredientsArr = [];
+        // If user types invalid input, the modal will appear with a new message. 
+        if (data.length == 0) {
+          modalMessage= "<p> We couldn't find your drink...</p>"
+          presentModal(); 
+        } else {
         for (let index = 0; index < data[0].ingredients.length; index++) {
           // console.log(data[0].ingredients.length);
           console.log(data[0].ingredients[index]);
@@ -83,11 +100,11 @@ function getDrinkApi() {
         getYoutubeApi();
         manageDrinkList();
         displayDrinkBtns();
+      };
       });
 };
 
 function displayDrinkData () {
-//   var drinkDataContainer = document.querySelector('.container');
     dataContainer.innerHTML = '';
 
 
