@@ -1,3 +1,237 @@
-*{
+* {
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
+
+/* styling for bg image span */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1597290282695-edc43d0e7129?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1175&q=80");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 50px;
+    color:rgb(255, 238, 222);
+}
+
+/* creating box for title, description and search */
+
+.box {
+    text-align: center;
+    background-color: rgba(223, 192, 166, 0.1);
+    width: 70%;
+    height: 500px;
+    border-style: double;
+    border-color: #c1946f;
+    border-radius: 10px;
+}
+
+/* title styling */
+
+
+.title {
+    padding: 20px;
+    margin: 20px;
+    font-size: 90px;
+    color: #fff;
+    animation: flicker 2.5s infinite alternate;
+}
+
+@keyframes flicker {
+    
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+  
+        text-shadow:
+        0 0 4px #fff,
+        0 0 11px #fff,
+        0 0 19px #f6e8d2,
+        0 0 40px rgb(255, 183, 0),
+        0 0 80px rgb(255, 174, 0),
+        0 0 90px rgb(255, 149, 0),
+        0 0 100px rgb(255, 204, 0),
+        0 0 150px rgb(255, 179, 0);
+    
+    }
+    
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }    
+  }
+  
+  
+/* for the title border */
+
+span {
+    border-color: #8c694b;
+    border-radius: 20px;
+    background-color: rgba(52, 42, 34, 0.5);
+    padding: 30px 70px;
+}
+
+/* subtitle styling */
+
+.subtitle {
+    color:rgb(255, 238, 222);
+    font-weight: 400;
+    padding-top: 40px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+    text-shadow: 5px 5px 5px  rgb(34, 26, 22);
+    padding-bottom: 40px;
+}
+
+
+
+button,
+input {
+    padding: 50px;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: larger;
+}
+
+input {
+    padding: 12px;
+    border: none;
+    background-color: rgba(250, 197, 154, 0.7);
+    box-shadow: 5px 5px 10px 5px #3b2616;
+}
+
+input::after {
+        background-color: rgba(250, 197, 154, 0.7);
+}
+
+/* making search placeholder a darker color */
+
+#drink-name::placeholder {
+    color: rgb(89, 50, 9);
+    font-size: larger;
+}
+
+
+ /* search button styling and animation */
+
+
+button {
+    background-color: #46372c;
+    border: none;
+    box-shadow: 5px 5px 10px #201914;
+}
+
+
+.btn-14 {
+    color: rgb(251, 231, 175);
+    text-align: center;
+    display: inline-block;
+    padding: 15px 40px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 20px;
+    border-bottom: 2px solid #2a1c15;
+  }
+  
+  .btn-14:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    background : rgb(251, 231, 175);
+    left: 45%;
+    height: 2px;
+    top: 0;
+    transition: all .3s;
+    opacity: 0.7;
+  }
+  
+  .btn-14:hover:before {
+    width: 100%;
+    left:0;
+  }
+
+  hr {
+    background-color: transparent;
+  }
+
+  /* container styles */
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+
+  /* result box styling */
+
+  .container-box {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+    color: rgb(252, 233, 208);
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(250, 197, 154, 0.1);
+    width: 80%;
+    height: 450px;
+    border-style: double;
+    border-color: #e7b286;
+    border-radius: 15px;
+    text-shadow: 2px 2px 5px rgb(50, 39, 29);
+    padding: 20px;
+    margin-right: 20px;
+}
+
+/* recent search box styling */
+#recent-search {
+    display: flex;
+    font-weight: bold;
+    flex-wrap: wrap;
+    color: rgb(252, 233, 208);
+    font-size: 20px;
+    text-align: center;
+    background-color: rgba(250, 197, 154, 0.1);
+    width: 50%;
+    height: 450px;
+    border-style: double;
+    border-color: #e7b286;
+    border-radius: 15px;
+    text-shadow: 2px 2px 5px rgb(50, 39, 29);
+}
+
+/* Mobile first queries*/
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
+
+
