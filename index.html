@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="icon" href="./Assets/images/favicon.png"> -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link href="./Assets/style.css">
+        <link rel="stylesheet" href="./Assets/style.css">
+        <link rel="stylesheet" href="../../dist/css/normalize.css">
+        <link rel="stylesheet" href="../../dist/css/skeleton.css">
+        <link rel="stylesheet" href="css/custom.css">
         
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
@@ -83,19 +86,19 @@
             }
             </style>
 
-        <title>Document</title>
+        <title>Rooster Tail</title>
     </head>
     
-    <body>
-        <div class="section">
-            <header>
-                <img src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png" alt="place-holder">
-            </header>
-            <h1 class="title">Chicken Tail</h1>
-            <p class="subtitle">Ever have just one line of a song stuck in your head? So has everyone. Just type in those lyrics and viola!</p>
-            <form id="drink-form" class="card-body"> 
-                <input name="drink-name" id="drink-name" type="text" placeholder="Search Bar..">
-                <button>Search</button>
+    <body style="background-image: url('https://images.unsplash.com/photo-1597290282695-edc43d0e7129?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1175&q=80'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+
+      <div class="section">
+        <div class="box">
+          <h1 class="title"><span>Rooster Tail</span></h1>
+                  <!-- made new little tagline. if we hate it we can change it -->
+          <p class="subtitle"><strong>Every glass can hold a masterpiece.</strong><br><strong>Now you can be the artist</strong></p>
+          <form id="drink-form" class="card-body">
+            <input name="drink-name" id="drink-name" type="text" placeholder="Enter search...">
+            <button class="btn-14">Search</button>
 
             <!-- MODAL -->
             
@@ -120,16 +123,19 @@
             <!-- MODAL -->
                 
             </form>
+            </div>
+          </div>
+
         </div>
-        <hr>
         <div class="container">
+          <div class="container-box">
             <iframe id="player" type="text/html" width="640" height="390" src="" frameborder="0"></iframe>
             <div class="data-container">
 
             </div>
-
+          </div>
+          <div id="recent-search"></div>
         </div>
-            
         </div>
         <script src="./Assets/script.js"></script>
     </body>
