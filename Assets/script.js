@@ -3,10 +3,10 @@ const cocktailApiKey = "0e2b4249bemshfa8c68bfa635a86p1f35e8jsn8175510a48cc";
 let drinkName = "";
 
 var userFormEl = document.querySelector('#drink-form');
-var submitButton = document.querySelector('button');
+// var submitButton = document.querySelector('button');
 var nameInputEl = document.querySelector('#drink-name');
 var dataContainer = document.querySelector(".data-container");
-// Get the modal
+var recentSearch = document.getElementById('recent-search');
 
 var modalBody = document.querySelector(".modal-body"); // <--- Gets the modal body from html, make it global.
 var modalMessage; //<--- Made a global var for the modal message.
@@ -22,7 +22,7 @@ const maxDrinksInList = 5; //<--- Number of drinks we want to display
 let videoPlayer = document.querySelector("#player");
 let videoId = "";
 
-// First function after user submits. 
+// First function after user submits a drink request.
 var formSubmitHandler = function(event) {
   event.preventDefault();
 
@@ -36,7 +36,16 @@ var formSubmitHandler = function(event) {
     }
 };
 
-// Put all of the modal stuff inside of a new function.
+// Function that runs after buttons in recent drink list are clicked
+var drinkBtnHandler = function (event) {
+  event.preventDefault(); 
+
+  drinkName = event.target.getAttribute('id');
+  console.log('drink', drinkName);
+  getDrinkApi();
+};
+
+// Function that will present the modal alerts when a user enters an invalid or null request
 function presentModal() {
   modalBody.innerHTML=modalMessage; //<---This sets the modal message into the HTML 
 
@@ -65,10 +74,9 @@ function presentModal() {
                 modal.style.display = "none";
               }
             }
-    // MODAL
-      // alert('Please enter a drink name'); //<--- This needs to be changed can't user alerts.
 };
 
+// Function to get API drink data when user enters a valid request.
 function getDrinkApi() {
     // fetch request gets a list of all the repos for the node.js organization
     var requestUrl = `https://cocktail-by-api-ninjas.p.rapidapi.com/v1/cocktail?name=${drinkName}&rapidapi-key=${cocktailApiKey}`;
@@ -86,7 +94,6 @@ function getDrinkApi() {
           presentModal(); 
         } else {
         for (let index = 0; index < data[0].ingredients.length; index++) {
-          // console.log(data[0].ingredients.length);
           console.log(data[0].ingredients[index]);
           ingredientsArr.push(data[0].ingredients[index]);
         }
@@ -98,12 +105,13 @@ function getDrinkApi() {
         console.log(data[0].name.toUpperCase());
         displayDrinkData();
         getYoutubeApi();
-        manageDrinkList();
+        manageDrinkList();  
         displayDrinkBtns();
       };
       });
 };
 
+// Function to dsiplay name, ingredient, and instruction data
 function displayDrinkData () {
     dataContainer.innerHTML = '';
 
@@ -126,6 +134,7 @@ function displayDrinkData () {
   console.log(dataContainer.innerHTML);
 };
 
+// Function to get youtube API data.
 function getYoutubeApi() {
     // fetch request gets a list of all the repos for the node.js organization
     var requestUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${apiDrinkName}%20recipe&topicId=%2Fm%2F02wbm&key=${youtubeApiKey}`;
@@ -140,11 +149,12 @@ function getYoutubeApi() {
         videoPlayer.src = `http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`;
 
       });
-}
+};
 
 // youtube embedded player example src
 // http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com
 
+// Function to manage the arrray of drinks the user has searched
 function manageDrinkList (){
   drinkListArr.unshift(drinkName); //<--- Adds the drink name to the array. Unshift puts it in the top and shifts the list down.
 
@@ -164,6 +174,7 @@ function manageDrinkList (){
   localStorage.setItem("drinks", JSON.stringify(drinkListArr));
 };
 
+// Function to get and parse the array in local storage.
 function buildDrinkList() {
   // Get the Item out of local storage
   let localReturn = localStorage.getItem("drinks");
@@ -172,15 +183,41 @@ function buildDrinkList() {
   };
 };
 
-// This is where I started to work on displaying the drink list as buttons. 
-// *** Not finished ***
+// Function to display the recent drinks as buttons in the recent search container.
 function displayDrinkBtns() {
+  removeButtons();
+
   for (i=0; i<drinkListArr.length; i++) {
-    var btn1 = document.createElement('button');
+    var but1 = document.createElement('button');
+    but1.className = 'btn';
+    but1.id = drinkListArr[i];
+    but1.innerHTML = drinkListArr[i].toUpperCase();
+
+    recentSearch.appendChild(but1);
   }
-}
+  recentSearch.addEventListener('click', drinkBtnHandler);
+};
+
+// Function that removes unwanted buttons from the recent searches list
+function removeButtons() {
+    var buttons = recentSearch.getElementsByTagName('button');
+
+    for (let index = 0; index < buttons.length; index++) {
+      buttons[index].remove();
+    };
+    buttons = recentSearch.getElementsByTagName('button');
+    for (let index = 0; index < buttons.length; index++) {
+      buttons[index].remove();
+    };
+    buttons = recentSearch.getElementsByTagName('button');
+    for (let index = 0; index < buttons.length; index++) {
+      buttons[index].remove();
+  };
+};
 
 
-
+// Builds the list of recent searches when the user loads in
+buildDrinkList(); 
+displayDrinkBtns();
 
 userFormEl.addEventListener('submit', formSubmitHandler);
