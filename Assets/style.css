@@ -38,7 +38,7 @@ body {
     width: 70%;
     height: 500px;
     border-style: double;
-    border-color: #c1946f;
+    border-color: #c16f6f;
     border-radius: 10px;
 }
 
@@ -164,6 +164,57 @@ button {
   .btn-14:hover:before {
     width: 100%;
     left:0;
+  }
+
+  .btn {
+    font-size: 1.3rem;
+    text-decoration: none;
+    padding: 6px 5px;
+    width: 100%;
+    display: block;
+    margin: 5px 0;
+    border-radius: var(--border-radius);
+    color: var(--primary);
+    border: none;
+    outline: none;
+    background-color: var(--light-dark);
+    background-color: #46372c;
+    box-shadow: 3px 3px var(--dark);
+    transform: translate(-1px, -1px);
+  }
+  
+  .btn:hover {
+    color: var(--primary);
+    background-color: var(--tertiary);
+    transform: translate(0, 0);
+    box-shadow: 2px 2px var(--dark);
+  }
+  
+  .btn-inline {
+    display: inline;
+  }
+  
+  .btn-back {
+    border-radius: var(--border-radius);
+    color: var(--primary);
+    border: none;
+    outline: none;
+    background-color: var(--light-dark);
+    box-shadow: 3px 3px var(--secondary);
+    transform: translate(-1px, -1px);
+    display: inline-block;
+    width: auto;
+    margin-top: 20px;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .btn-back:hover {
+    color: var(--primary);
+    background-color: var(--tertiary);
+    transform: translate(0, 0);
+    box-shadow: 2px 2px var(--dark);
   }
 
   hr {
