@@ -1,4 +1,4 @@
-const youtubeApiKey = "AIzaSyBxsSu73r-9dtqHr1bE6gcuq88r5C9ZTDI";
+const youtubeApiKey = "AIzaSyBFPeKfJVOIkmKNZnm1fEDnt-iswWaxi_k";
 const cocktailApiKey = "0e2b4249bemshfa8c68bfa635a86p1f35e8jsn8175510a48cc";
 let drinkName = "";
 
