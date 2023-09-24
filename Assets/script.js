@@ -146,7 +146,7 @@ function getYoutubeApi() {
       .then(function (data) {
         console.log(data)
         videoId = data.items[0].id.videoId;
-        videoPlayer.src = `http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`;
+        videoPlayer.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com`;
 
       });
 };
