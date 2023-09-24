@@ -38,7 +38,7 @@ body {
     width: 70%;
     height: 500px;
     border-style: double;
-    border-color: #c16f6f;
+    border-color:  #e7b286;
     border-radius: 10px;
 }
 
@@ -242,7 +242,6 @@ button {
     text-align: center;
     background-color: rgba(250, 197, 154, 0.1);
     width: 80%;
-    height: 450px;
     border-style: double;
     border-color: #e7b286;
     border-radius: 15px;
