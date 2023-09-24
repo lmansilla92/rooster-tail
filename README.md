@@ -9,10 +9,11 @@ Users can also type in a type of spirit and get back a cocktail idea that uses t
 3) Look at results!
 
 # URL:
-
+[Deployed Page](https://lmansilla92.github.io/rooster-tail/)
 
 # Screenshot:
-
+Landing Page:
+    ![Landing Page](./Assets/images/rooster-tail.png)
 
 # Credits:
 Keighley Kendig
