@@ -107,6 +107,12 @@ input {
     font-size: larger;
 }
 
+.recent-search-btn {
+    color: rgb(252, 233, 208);
+    text-shadow: 2px 2px 5px rgb(50, 39, 29);
+    height: 17vh;
+}
+
 input {
     padding: 12px;
     border: none;

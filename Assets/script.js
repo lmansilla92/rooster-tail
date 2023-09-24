@@ -6,6 +6,7 @@ var userFormEl = document.querySelector('#drink-form');
 var submitButton = document.querySelector('button');
 var nameInputEl = document.querySelector('#drink-name');
 var dataContainer = document.querySelector(".data-container");
+const recentSearchContainer = document.getElementById('recent-search');
 // Get the modal
 
 var modalBody = document.querySelector(".modal-body"); // <--- Gets the modal body from html, make it global.
@@ -145,11 +146,18 @@ function getYoutubeApi() {
 // youtube embedded player example src
 // http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com
 
+
+historyDrinkList();
+// Updates drinkListArr with items in local storage
+function historyDrinkList (){
+    drinkListArr = JSON.parse(localStorage.getItem("drinks"));
+}
+
 function manageDrinkList (){
   drinkListArr.unshift(drinkName); //<--- Adds the drink name to the array. Unshift puts it in the top and shifts the list down.
 
   // This for loop deletes duplicate drink names
-  for (i=1; i< drinkListArr.length; i++) {
+  for (var i=1; i< drinkListArr.length; i++) {
     if (drinkName === drinkListArr[i]) {
       drinkListArr.splice(i,1);
     }
@@ -173,10 +181,23 @@ function buildDrinkList() {
 };
 
 // This is where I started to work on displaying the drink list as buttons. 
-// *** Not finished ***
+
+// calls function that displays drink search history on page refresh
+displayDrinkBtns();
+
 function displayDrinkBtns() {
-  for (i=0; i<drinkListArr.length; i++) {
+    cities = JSON.parse(localStorage.getItem("cities"));
+    recentSearchContainer.innerHTML = '';
+
+  for (var i=0; i < drinkListArr.length; i++) {
     var btn1 = document.createElement('button');
+    btn1.classList.add("recent-search-btn");
+    btn1.textContent = drinkListArr[i];
+    recentSearchContainer.appendChild(btn1);
+    btn1.addEventListener('click', function(event) {
+        drinkName = event.target.textContent;
+        getDrinkApi();
+    })
   }
 }
 
